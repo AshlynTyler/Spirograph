@@ -29,6 +29,12 @@ let canvas = document.getElementById("draw-canvas")
 
 let draw = canvas.getContext("2d")
 
+draw.translate(500,500)
+
+draw.linejoin = "round"
+
+let drawInterval
+
 let arms = []
 
 let hue = 0;
@@ -37,7 +43,7 @@ function randomizeArms(number){
     arms = [];
 
     for(let i = 0; i < number; i++){
-        arms[i] = new Arm(range(30,100),range(-10,10))
+        arms[i] = new Arm(range(30,100),range(-20,20))
 
         if(i === number - 1)
             arms[i].draws = true
@@ -54,7 +60,7 @@ function determineDrawPos(){
         y: 0
     }
     arms.forEach(function(index){
-        let indexPos = findXY(pos.radius,degToRad(pos.direction))
+        let indexPos = findXY(index.radius,degToRad(index.direction))
 
         pos.x += indexPos.x
 
@@ -64,10 +70,22 @@ function determineDrawPos(){
     return pos
 }
 
+function drawStart(){
+    hue = range(1,600);
+
+    drawInterval = setInterval(function(){
+        drawStep();
+    }, 10)
+}
+
 function drawStep(){
 
     //adjusting the color
     hue += 1;
+
+    if(hue > 600){
+        hue = 1
+    }
 
     let red = 0;
 
@@ -123,5 +141,46 @@ function drawStep(){
 
     // starting a new line
 
+    draw.strokeStyle = drawColor;
+
     draw.beginPath();
+
+    let pos = determineDrawPos();
+
+    draw.moveTo(pos.x,pos.y)
+
+    //moving the arms according to their speed.
+
+    let done = true
+
+    arms.forEach(function(index){
+        index.direction += index.speed
+
+        if(index.direction > 360){
+            index.direction -= 360
+        }
+
+        if(index.direction < 0){
+            index.direction += 360
+        }
+
+        if(index.direction !== 270)
+            done = false
+    })
+
+    // finishing the line
+
+    pos = determineDrawPos();
+
+    draw.lineTo(pos.x,pos.y)
+
+    draw.stroke();
+
+    if(done === true){
+        clearInterval(drawInterval);
+    }
 }
+
+randomizeArms(4)
+
+drawStart();
