@@ -49,6 +49,9 @@ function randomizeArms(number){
             arms[i].draws = true
     }
 
+    
+    hue = range(1,600);
+
     console.log(arms)
 }
 
@@ -71,7 +74,6 @@ function determineDrawPos(){
 }
 
 function drawStart(){
-    hue = range(1,600);
 
     drawInterval = setInterval(function(){
         drawStep();
@@ -179,6 +181,10 @@ function drawStep(){
     if(done === true){
         clearInterval(drawInterval);
     }
+}
+
+function createSettings(){
+    
 }
 
 randomizeArms(3)
