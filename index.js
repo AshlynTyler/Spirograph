@@ -184,7 +184,13 @@ function drawStep(){
 }
 
 function createSettings(){
-    
+
+    arms.forEach(function(index){
+        $("#settings").append(
+            
+        )
+    })
+
 }
 
 randomizeArms(3)
