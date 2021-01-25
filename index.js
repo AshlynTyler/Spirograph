@@ -35,6 +35,8 @@ draw.linejoin = "round"
 
 let drawInterval
 
+let drawing = false;
+
 let arms = []
 
 let hue = 0;
@@ -74,6 +76,11 @@ function determineDrawPos(){
 }
 
 function drawStart(){
+    drawing = true;
+
+    $(".button").css("background","transparent")
+    $(".button").css("cursor","default")
+    draw.clearRect(-500,-500,canvas.offsetWidth,canvas.offsetHeight)
 
     drawInterval = setInterval(function(){
         drawStep();
@@ -179,7 +186,12 @@ function drawStep(){
     draw.stroke();
 
     if(done === true){
+        drawing = false
         clearInterval(drawInterval);
+
+        $("#random-button").css("background","#888822")
+        $("#start-button").css("background","#11cc22")
+        $(".button").css("cursor","pointer")
     }
 }
 
@@ -187,11 +199,19 @@ function createSettings(){
 
     arms.forEach(function(index){
         $("#settings").append(
-            
+
         )
     })
 
 }
+
+$("body").on("click","#random-button",function(event){
+    if(drawing === false){
+        randomizeArms(3)
+
+        drawStart();
+    }
+})
 
 randomizeArms(3)
 

@@ -24,8 +24,15 @@ body{
     text-align: center;
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
+    user-select: none;
 }
 
 #colorRange{
     margin-bottom:50px;
+}
+
+#random-button{
+    background-color: #888822;
+    
 }
