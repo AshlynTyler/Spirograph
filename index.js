@@ -54,6 +54,8 @@ function randomizeArms(number){
     
     hue = range(1,600);
 
+    $("#colorRange").val(hue)
+
     console.log(arms)
 }
 
@@ -77,6 +79,8 @@ function determineDrawPos(){
 
 function drawStart(){
     drawing = true;
+
+    hue = $("#colorRange").val()
 
     $(".button").css("background","transparent")
     $(".button").css("cursor","default")
@@ -209,6 +213,12 @@ $("body").on("click","#random-button",function(event){
     if(drawing === false){
         randomizeArms(3)
 
+        drawStart();
+    }
+})
+
+$("body").on("click","#start-button",function(event){
+    if(drawing === false){
         drawStart();
     }
 })

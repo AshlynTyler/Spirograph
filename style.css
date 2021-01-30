@@ -28,11 +28,40 @@ body{
     user-select: none;
 }
 
-#colorRange{
-    margin-bottom:50px;
-}
 
 #random-button{
     background-color: #888822;
     
 }
+
+#colorRange {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 5px; /* Specified height */
+    background-image: url(hue-scale.png);
+  
+    background-size: cover;
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    margin-bottom:50px;
+    cursor: pointer;
+  }
+
+  #colorRange:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+
+  #colorRange::-webkit-slider-thumb {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    opacity: .8;
+  }
+
+  #colorRange::-moz-range-thumb {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    opacity: .8;
+  }
