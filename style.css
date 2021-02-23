@@ -65,3 +65,7 @@ body{
     appearance: none;
     opacity: .8;
   }
+
+  #arm-settings {
+    flex-direction: column;
+  }
