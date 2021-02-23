@@ -18,7 +18,8 @@ function findXY(length,angle){
 }
 
 //functions for the rotating arms of the spirograph
-function Arm(radius,speed,draws = false, direction = 90){
+function Arm(id,radius,speed,draws = false, direction = 90){
+    this.id = "arm-" + String(id)
     this.radius = radius;
     this.draws = draws;
     this.direction = direction
@@ -45,13 +46,20 @@ function randomizeArms(number){
     arms = [];
 
     for(let i = 0; i < number; i++){
-        arms[i] = new Arm(range(30,100),range(-30,30)/2)
+        arms[i] = new Arm(i,range(30,100),range(-30,30)/2)
 
         if(i === number - 1)
             arms[i].draws = true
     }
 
-    
+    //Add controls for each arm
+
+    $("#arm-settings").html("")
+
+    arms.forEach(function(index){
+        console.log(index.id)
+    })
+
     hue = range(1,600);
 
     $("#colorRange").val(hue)
