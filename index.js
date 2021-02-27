@@ -47,7 +47,7 @@ function randomizeArms(number){
     arms = [];
 
     for(let i = 0; i < number; i++){
-        arms[i] = new Arm(i,range(30,100),range(-30,30)/2)
+        arms[i] = new Arm(i,range(30,100),range(-20,20))
 
         if(i === number - 1)
             arms[i].draws = true
@@ -67,6 +67,10 @@ function randomizeArms(number){
                 <span> Length </span>
 
                 <input type=range min = "30" max = "100" value = ${index.radius} id = "${index.id}-length">
+
+                <Span> Rotation Speed </span>
+
+                <input type=range min = "-20" max = "20" value = ${index.speed} id = "${index.id}-speed">
             </div>
         `)
     })
@@ -104,7 +108,11 @@ function drawStart(){
     hue = $("#colorRange").val()
 
     arms.forEach(function(index){
-        index.radius = $("#" + index.id +"-length").val()
+        index.radius = parseInt($("#" + index.id +"-length").val())
+
+        index.speed = parseInt($("#" + index.id + "-speed").val())
+
+        console.log(index.speed)
     })
 
     $(".button").css("background","transparent")
